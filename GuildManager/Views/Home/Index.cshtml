@@ -11,13 +11,14 @@
 <h2>Guilds</h2>
 
 <div id="guild-overview">
-    <guild-overview :guilds="[@Html.Raw(Model.SerializedGuilds)]"></guild-overview>
+    <guild-overview :guilds="@Model.SerializedGuilds"></guild-overview>
+
+    <guild-overview :guilds="@Model.SerializedGuilds"></guild-overview>
 </div>
 
 
 <script>
 
-    var guildData = { guilds: @Html.Raw(Model.SerializedGuilds) }
 
     Vue.component('guild-overview', {
         template:
