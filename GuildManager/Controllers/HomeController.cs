@@ -17,9 +17,11 @@ namespace GuildManager.Controllers
         public ActionResult Index()
         {
 
-            GuildIndexViewModel vm = new GuildIndexViewModel
+            GuildIndexViewModel vm = new GuildIndexViewModel //<--
             {
-                Guilds = db.Guilds.ToList()
+                Guilds = db.Guilds.ToList(),
+                Players = db.Characters.ToList()
+                
             };
             
             return View(vm);

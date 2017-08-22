@@ -9,48 +9,57 @@
 </div>
 
 <div id="top-players">
-    <h2>Top players</h2>
-    <table>
+    <h2>Top 3 players</h2>
+    <top-players :players="@Model.TopPlayers"></top-players>
+</div>
+
+
+
+<script type="text/x-template" id="guild-overview-template">
+    <table class="table">
         <thead>
             <tr>
+                <td>ID</td>
                 <td>Name</td>
-                <td>Contribution</td>
-                <td>Guild</td>
+                <td>Level</td>
+                <td>Points</td>
+                <td>Members</td>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="player in topPlayers">
-                <td>{{ player.Name }} {{ player.FamilyName }}</td>
-                <td>{{ player.Membership.ContributionPoints }}</td>
-                <td>{{ player.Membership.Guild.Name }}</td>
+            <tr v-for="guild in guilds">
+                <td>{{ guild.ID }}</td>
+                <td>{{ guild.Name }}</td>
+                <td>{{ guild.Level }}</td>
+                <td>{{ guild.Points }}</td>
+                <td>{{ guild.Memberships | getLength }}</td>
             </tr>
         </tbody>
     </table>
-</div>
+</script>
 
-<script>
-    Vue.component('guild-overview', {
-        template:
-        `<table class="table">
+<script type="text/x-template" id="top-players-template">
+        <table>
             <thead>
                 <tr>
-                    <td>ID</td>
                     <td>Name</td>
-                    <td>Level</td>
-                    <td>Points</td>
-                    <td>Members</td>
+                    <td>Contribution</td>
+                    <td>Guild</td>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="guild in guilds">
-                    <td>{{ guild.ID }}</td>
-                    <td>{{ guild.Name }}</td>
-                    <td>{{ guild.Level }}</td>
-                    <td>{{ guild.Points }}</td>
-                    <td>{{ guild.Memberships | getLength }}</td>
+                <tr v-for="player in players">
+                    <td>{{ player.Name }} {{ player.FamilyName }}</td>
+                    <td>{{ player.Membership.ContributionPoints }}</td>
+                    <td>{{ player.Membership.Guild.Name }}</td>
                 </tr>
             </tbody>
-        </table>`,
+        </table>
+</script>
+
+<script>
+    Vue.component('guild-overview', {
+        template: '#guild-overview-template',
         props: ['guilds'],
         filters: {
             getLength: function (object) {
@@ -60,13 +69,17 @@
     });
 
     var guildOverview = new Vue({
-        el: '#guild-overview',
+        el: '#guild-overview'
+    });
+
+    Vue.component('top-players', {
+        template: '#top-players-template',
+        props: ['players'],
     });
 
     var topPlayers = new Vue({
         el: "#top-players"
-
-    })
+    });
 </script>
 
 
