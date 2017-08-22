@@ -8,10 +8,27 @@
     <guild-overview :guilds="@Model.SerializedGuilds"></guild-overview>
 </div>
 
+<div id="top-players">
+    <h2>Top players</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Contribution</td>
+                <td>Guild</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="player in topPlayers">
+                <td>{{ player.Name }} {{ player.FamilyName }}</td>
+                <td>{{ player.Membership.ContributionPoints }}</td>
+                <td>{{ player.Membership.Guild.Name }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <script>
-
-
     Vue.component('guild-overview', {
         template:
         `<table class="table">
@@ -45,6 +62,11 @@
     var guildOverview = new Vue({
         el: '#guild-overview',
     });
+
+    var topPlayers = new Vue({
+        el: "#top-players"
+
+    })
 </script>
 
 

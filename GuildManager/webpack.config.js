@@ -1,21 +1,26 @@
 ﻿"use strict";
 
 module.exports = {
-    entry: "./src/file.js",
+    // This is the "main" file which should include all other modules
+    entry: '/Scripts/main.js',
+    // Where should the compiled file go?
     output: {
-        filename: "./dist/bundle.js"
-    },
-    devServer: {
-        contentBase: ".",
-        host: "localhost",
-        port: 9000
+        // To the `dist` folder
+        path: './dist',
+        // With the filename `build.js` so it's dist/build.js
+        filename: 'build.js'
     },
     module: {
+        // Special compilation rules
         loaders: [
             {
-                test: /\.jsx?$/,
-                loader: "babel-loader"
+                // Ask webpack to check: If this file ends with .js, then apply some transforms
+                test: /\.js$/,
+                // Transform it with babel
+                loader: 'babel',
+                // don't transform node_modules folder (which don't need to be compiled)
+                exclude: /node_modules/
             }
         ]
     }
-};
+}
