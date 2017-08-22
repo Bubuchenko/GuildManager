@@ -1,0 +1,58 @@
+﻿@model GuildManager.ViewModels.GuildIndexViewModel
+@{
+
+}
+
+
+
+
+
+
+<h2>Guilds</h2>
+
+<div id="guild-overview">
+    <guild-overview :guilds="[@Html.Raw(Model.SerializedGuilds)]"></guild-overview>
+</div>
+
+
+<script>
+
+    var guildData = { guilds: @Html.Raw(Model.SerializedGuilds) }
+
+    Vue.component('guild-overview', {
+        template:
+        `<table class="table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Level</td>
+                    <td>Points</td>
+                    <td>Members</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="guild in guilds">
+                    <td>{{ guild.ID }}</td>
+                    <td>{{ guild.Name }}</td>
+                    <td>{{ guild.Level }}</td>
+                    <td>{{ guild.Points }}</td>
+                    <td>{{ guild.Memberships | getLength }}</td>
+                </tr>
+            </tbody>
+        </table>`,
+        props: ['guilds'],
+        filters: {
+            getLength: function (object) {
+                return object.length;
+            }
+        }
+    });
+
+    var guildOverview = new Vue({
+        el: '#guild-overview',
+    });
+</script>
+
+
+
